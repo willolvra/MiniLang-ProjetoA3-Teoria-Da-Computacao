@@ -1,28 +1,27 @@
 package br.com.minilang.main;
 
 import br.com.minilang.lexer.Lexer;
-import br.com.minilang.models.Token;
-import br.com.minilang.parser.Parser;
+import br.com.minilang.semantic.Semantic;
 
 import java.util.List;
 
 public class Main {
-    public static void main() {
+    public static void main(String[] args) {
 
-        String codigo = "x = 10"; // valido
-        //String codigo = "x = 10 + 5"; // valido
-        //String codigo = "print(y)"; // valido
-        //String codigo = "x = + 5"; // invalido
-        //String codigo = "print()"; // invalido
-        //String codigo = "x 10 ="; // invalido
-
+        Semantic semantic = new Semantic();
         Lexer lexer = new Lexer();
-        List<Token> tokens = lexer.analisar(codigo);
 
-        Parser parser = new Parser();
+        semantic.analisar(
+                lexer.analisar("x = 10") // retorna true
+        );
 
-        System.out.println(tokens);
-        System.out.println(parser.analisar(tokens));
+        semantic.analisar(
+                lexer.analisar("x = y") // vai retornar false, y nao esta declarada
+        );
+
+        semantic.analisar(
+                lexer.analisar("y = x") // retorna true
+        );
 
     }
 }
