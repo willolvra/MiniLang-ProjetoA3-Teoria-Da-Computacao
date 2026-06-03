@@ -1,6 +1,8 @@
 package br.com.minilang.main;
 
 import br.com.minilang.lexer.Lexer;
+import br.com.minilang.models.Token;
+import br.com.minilang.parser.Parser;
 import br.com.minilang.semantic.Semantic;
 
 import java.util.List;
@@ -8,20 +10,30 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        Semantic semantic = new Semantic();
+        String codigo = "y = x + 5";
+
         Lexer lexer = new Lexer();
+        Parser parser = new Parser();
+        Semantic semantic = new Semantic();
 
-        semantic.analisar(
-                lexer.analisar("x = 10") // retorna true
-        );
+        List<Token> tokens = lexer.analisar(codigo);
 
-        semantic.analisar(
-                lexer.analisar("x = y") // vai retornar false, y nao esta declarada
-        );
+        System.out.println("Tokens:");
+        System.out.println(tokens);
 
-        semantic.analisar(
-                lexer.analisar("y = x") // retorna true
-        );
+        if (!parser.analisar(tokens)) {
+            System.out.println("Erro sintatico.");
+            return;
+        }
+
+        System.out.println("Sintaxe valida.");
+
+        if (!semantic.analisar(tokens)) {
+            return;
+        }
+
+        System.out.println("Semantica valida.");
+
 
     }
 }
