@@ -1,7 +1,5 @@
 package br.com.minilang.models;
 
-import br.com.minilang.enums.TokenType;
-
 public class Token {
     private TokenType type;
     private String value;

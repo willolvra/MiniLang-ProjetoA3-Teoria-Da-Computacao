@@ -1,6 +1,6 @@
 package br.com.minilang.semantic;
 
-import br.com.minilang.enums.TokenType;
+import br.com.minilang.models.TokenType;
 import br.com.minilang.models.Token;
 
 import java.util.HashSet;
@@ -32,8 +32,8 @@ public class Semantic {
         Token nomeVariavel = tokens.get(0);
         Token valor = tokens.get(2);
 
-        if (valor.getType() == TokenType.ID && !variaveis.contains(valor.getValue())) {
-            mostrarErro(valor.getValue());
+        if (valor.getType() == TokenType.ID && !variaveis.contains(valor.getValue())) { //ve se o valor eh um ID,
+            mostrarErro(valor.getValue());                                    //se for, verifica se ja foi declarado antes, se nao foi, da erro
             return false;
         }
 

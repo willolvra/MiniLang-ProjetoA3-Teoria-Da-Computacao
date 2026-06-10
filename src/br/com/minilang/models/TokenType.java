@@ -1,4 +1,4 @@
-package br.com.minilang.enums;
+package br.com.minilang.models;
 
 public enum TokenType {
     ID,
